@@ -34,6 +34,10 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
     apt-get update -q && \
     apt-get install -y --no-install-recommends \
       ros-${ROS_DISTRO}-ros-base \
+      ros-${ROS_DISTRO}-navigation2 \
+      ros-${ROS_DISTRO}-nav2-bringup \
+      #ros-${ROS_DISTRO}-rviz2 \
+      "~ros-${ROS_DISTRO}-turtlebot3-.*" \
       python3-rosdep \
       python3-colcon-common-extensions \
       python3-vcstool
