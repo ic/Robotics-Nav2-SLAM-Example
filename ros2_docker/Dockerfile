@@ -24,8 +24,7 @@ RUN apt-get install -yq \
         tzdata \
         gosu \
         python3-argcomplete \
-        python3-pip \
-    && rm -rf /var/lib/apt/lists/*
+        python3-pip
 
 # Install the immutable components BEFORE we copy in build context stuff to keep the rebuild process manageable
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
@@ -37,8 +36,7 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
       ros-${ROS_DISTRO}-ros-base \
       python3-rosdep \
       python3-colcon-common-extensions \
-      python3-vcstool \
-    && rm -rf /var/lib/apt/lists/* && rm /etc/apt/sources.list.d/ros2-latest.list
+      python3-vcstool
 
 RUN useradd --create-home --home-dir /home/${DEV_NAME} --shell /bin/bash --user-group --groups adm,sudo ${DEV_NAME} && \
     echo "$DEV_NAME:$DEV_NAME" | chpasswd && \
@@ -56,8 +54,7 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
     chmod +x /bin/ros2-setup.bash && \
     gosu ${DEV_NAME} /bin/ros2-setup.bash && \
     runuser -u ${DEV_NAME} ros2-setup.bash && \
-    rm /bin/ros2-setup.bash && \
-    rm -rf /var/lib/apt/lists/* && rm /etc/apt/sources.list.d/ros2-latest.list
+    rm /bin/ros2-setup.bash
 
 RUN echo ". /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${DEV_NAME}/.bashrc && \
     echo ". /home/${DEV_NAME}/${WS_NAME}/install/local_setup.bash" >> /home/${DEV_NAME}/.bashrc
