@@ -10,10 +10,8 @@ ENV WS_NAME=colcon_ws
 
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 RUN echo "Set disable_coredump false" >> /etc/sudo.conf
-RUN apt-get update -q && \
-    apt-get upgrade -yq && \
-    apt-get install -yq \
-        wget \
+RUN apt-get update -q && apt-get upgrade -yq
+RUN apt-get install -yq \
         curl \
         git \
         build-essential \
